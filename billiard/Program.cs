@@ -12,11 +12,48 @@ namespace billiard
         {
             List<int> golyok = new List<int>();
             kezdes(golyok);
+            int leesett;
+            int szamolo = 0;
+            do
+            {
+                szamolo++;
+                leesett = eltettsors(golyok);
+                Console.WriteLine($"Az elrakott golyó:{leesett} ");
+                kiiro(golyok);
+                Console.ReadKey();
+                
+            } while (golyok.Contains(8));
+            if (golyok.Count==0)
+            {
+                Console.WriteLine("Nyertél");
+            }
+            else
+            {
+                Console.WriteLine("MÉ RAKTAD EL A NYÓCAT?");
+                Console.WriteLine("Vesztettél");
+            }
+            
+            Console.ReadKey();
+        }
+
+        static void kiiro(List<int> golyok)
+        {
             foreach (var item in golyok)
             {
-                Console.WriteLine(item);
+                Console.Write($"{item} ");
             }
-            Console.ReadKey();
+            Console.WriteLine();
+        }
+
+        static int eltettsors(List<int> golyok)
+        {
+            Random rnd = new Random();
+            int szám = rnd.Next(golyok.Count);
+            int sorsolt = golyok[szám];
+            golyok.Remove(golyok[szám]);
+            return sorsolt;
+            
+
         }
 
         static void kezdes(List<int> golyok)
